@@ -8,7 +8,7 @@ const moment = require("moment")
 app.use(bodyParser.urlencoded({ extended : false }));
 
 router.post("/register", async (req, res, next) => {
-    let users = ["raju", "suresh", "ramana", "suri"]
+    let users = ["raju", "suresh", "ramana", "suri", "pavan"]
     console.log(req.body);
     if(!req.body || !req.body.username || !req.body.password){
         console.log("Username or password is missing");

@@ -5,7 +5,9 @@ const port = process.env.PORT || 3003;
 const middleware = require('./middleware');
 const path = require("path")
 const mongoose = require("./database");
+const cors = require("cors");
 
+app.use(cors());
 const server = app.listen(port, () => console.log("Server listening on port " + port));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
