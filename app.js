@@ -20,4 +20,8 @@ app.use("/bills/", billRoute);
 app.use("/users/", userRoute);
 
 
+app.get("/", (req, res, next) => {
+    return res.send("Hi, This is backend server");
+});
+
 
