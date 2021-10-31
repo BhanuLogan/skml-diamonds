@@ -9,7 +9,7 @@ const BillSchema = new Schema({
     quantity : { type: Number },
     amount : { type : Number },
     approvedBy : { type : String, required : true, trim : true},
-    billType : { type : String, required : true},
+    status : { type : String, required : true},
     billedAt : { type : String }
 }, { timestamps : true });
 
