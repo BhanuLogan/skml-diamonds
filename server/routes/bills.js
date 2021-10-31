@@ -72,7 +72,7 @@ router.post("/", (req, res, next) => {
 
 router.get("/", async (req, res, next) => {
     let params = req.query;
-    let count = params.count ? Math.min(parseInt(params.count), 10) : 10;
+    let count = params.count ? parseInt(params.count) : 10;
     let skip = params.skip ? parseInt(params.skip) : 0;
     let status = params.status ? getStatus(params.status) : null;
     let filter = getFilterObj(params.search);
@@ -82,9 +82,18 @@ router.get("/", async (req, res, next) => {
     Bill.find(filter)
     .sort({ createdAt: -1 })
     .skip(skip)
-    .limit(count)
+    .limit(count + 1)
     .then(data => {
-        return res.status(200).send(data);
+        let bills = []
+        if(data){
+            for(let i = 0; i < count; i++)
+                bills.push(data[i]);
+        }
+        const result = {
+            hasMore : data && (data.length == (count + 1)),
+            data : bills
+        }
+        return res.status(200).send(result);
     }).catch(err => {
         console.log("Retrieving bills failed with error : " + err);
         return res.sendStatus(400);
